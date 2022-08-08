@@ -17,7 +17,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 import Icon from "./icon";
 import { signin, signup } from "../../actions/auth";
-import { AUTH } from "../../constants/actionTypes";
+import { AUTHBYGOOGLE } from "../../constants/actionTypes";
 import useStyles from "./styles";
 import Input from "./Input";
 
@@ -71,32 +71,15 @@ const SignUp = () => {
 
   const handleLogin = async () => {
     let user = await signInWithPopup(auth, provider);
-
-    console.log(user);
+    // console.log(user);
 
     try {
-      dispatch({type: 'AUTHBYGOOGLE', data:{user} });
+      dispatch({type: AUTHBYGOOGLE, data:{user} });
       navigate('/');
     } catch(error) {
        console.log(error);
     };
-    
   };
-
-  //   const googleSuccess = async (res) => {
-  //     const result = res?.profileObj;
-  //     const token = res?.tokenId;
-
-  //     try {
-  //       dispatch({ type: AUTH, data: { result, token } });
-
-  //       history.push('/');
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -160,17 +143,7 @@ const SignUp = () => {
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
-          {/* <GoogleLogin
-            clientId="564033717568-e5p23rhvcs4i6kffgsbci1d64r8hp6fn.apps.googleusercontent.com"
-            render={(renderProps) => (
-              <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
-                Google Sign In
-              </Button>
-            )}
-            onSuccess={googleSuccess}
-            onFailure={googleError}
-            cookiePolicy="single_host_origin"
-          /> */}
+
           <Button
             className={classes.buttonSubmit}
             fullWidth

@@ -1,6 +1,6 @@
 import { AUTH, AUTHBYGOOGLE, LOGOUT } from '../constants/actionTypes';
 
-const auth = (state = { authData: null}, action) => {
+const authReducer = (state = { authData: null}, action) => {
   switch (action.type) {
     case AUTH:
        console.log(action);
@@ -11,9 +11,10 @@ const auth = (state = { authData: null}, action) => {
       localStorage.setItem("profile", JSON.stringify({ ...action }));
       return {...state, authData: action };
     case AUTHBYGOOGLE:
+    //   console.log(action?.data);
       let authData = action?.data.user.user;
 
-      console.log(authData);
+    //   console.log(authData);
     //   console.log(action?.data.user.user.displayName);
     //   console.log(action?.data.user.user.email);
     //   console.log(action?.data.user.user.photoURL);
@@ -29,4 +30,4 @@ const auth = (state = { authData: null}, action) => {
   }
 };
 
-export default auth;
+export default authReducer;
